@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="text-center">Sound out and spell phonetically</h1>
+<br>
+
+{% if card %}
+  <div class="jumbotron">
+      <div class="container">
+          <div class="row">
+            <div class="col border border-primary rounded-lg mx-3 p-0"><img src="{{ card.card_image.url }}" alt="" width="100%" class="img-fluid"></div>
+            <div class="col border border-primary rounded-lg mx-3">{{ card.card_word }}</div>
+            <div class="col border border-primary rounded-lg mx-3">{{ card.card_word }}</div>
+            <div class="col border border-primary rounded-lg mx-3">{{ card.card_word }}</div>
+          </div>
+      </div>
+  </div>
+
+  <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form action="{% url 'card' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group input-group-lg">
+                    <input type="text" name="guess" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Guess</button>
+            </form>
+        </div>
+      </div>
+  </div>
+{% endif %}
+
+{% if guess %}
+  {{ guess }}
+{% endif %}
+  
+
+{% endblock %}
